@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  # Web Server Service
+  dockerize_laravel:
+    container_name: dockerize_laravel
+    build: .
+    volumes:
+      - ./dockerize_laravel:/var/www/html
+    ports:
+      - 8001:80
+    depends_on:
+      - mysql_db
+
+  # Database server
+  mysql_db:
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: root
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3308:3309
+
+  # phpMyAdmin Service
+  phpmyadmin:
+    image: phpmyadmin:latest
+    ports:
+      - 9003:80
+    environment:
+      - PMA_ARBITRARY=1
+    depends_on:
+      - mysql_db
