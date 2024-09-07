@@ -12,7 +12,7 @@ services:
     depends_on:
       - mysql_db
 
-  # Database server here
+  # Database server
   mysql_db:
     image: mysql:latest
     environment:
